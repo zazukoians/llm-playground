@@ -1,0 +1,521 @@
+@prefix : <https://schema.ld.admin.ch/> .
+@prefix cube: <https://cube.link/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default1: <https://cube.link/meta/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://environment.ld.admin.ch/foen/ubd000502/4> a void:Dataset,
+        schema1:Dataset,
+        dcat:Dataset,
+        cube:Cube ;
+    dcterms:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/ANNUAL> ;
+    dcterms:creator <https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu> ;
+    dcterms:description "Entwicklung der Treibhausgasemissionen der Schweiz seit 1990 in den Sektoren gemäss CO2-Verordnung und aufgeteilt nach Gasen. Separat ausgewiesen werden die Treibhausgasemissionen aus dem internationalen Flug- und Schiffsverkehr sowie die Treibhausgasbilanz der Landnutzung (Böden, Vegetation)."@de,
+        "Evolution of Switzerland’s greenhouse gas emissions since 1990 in the sectors in accordance with the CO2 Ordinance and broken down by gas. The greenhouse gas emissions from international aviation and navigation as well as the greenhouse gas balance from land use (soil, vegetation) are shown separately."@en,
+        "Évolution des émissions de gaz à effet de serre de la Suisse depuis 1990 dans les secteurs définis dans l’ordonnance sur le CO2 et réparties par gaz. Les émissions de gaz à effet de serre générées par l’aviation et la navigation internationales et le bilan des gaz à effet de serre lié à l’utilisation des terres (sols, végétation) sont présentées de manière distincte."@fr,
+        "Evoluzione delle emissioni di gas serra della Svizzera dal 1990 nei settori conformemente all’ordinanza sul CO2 e suddivise per gas. Vengono riportate separatamente le emissioni di gas serra generate dal trasporto aereo e navale internazionale come pure il bilancio dei gas serra da uso del territorio (suoli, vegetazione)."@it ;
+    dcterms:identifier "ubd000502"^^xsd:string ;
+    dcterms:issued "2022-08-31"^^xsd:date ;
+    dcterms:license <https://www.fedlex.admin.ch/eli/cc/1984/1122_1122_1122/de#art_10_e>,
+        <https://www.fedlex.admin.ch/eli/cc/2012/856/de#art_131> ;
+    dcterms:modified "2023-05-24T12:10:00.524000+00:00"^^xsd:dateTime ;
+    dcterms:publisher "Bundesamt für Umwelt, Abteilung Klima"^^xsd:string ;
+    dcterms:rights <https://ld.admin.ch/vocabulary/TermsOfUse/Provide-the-Source> ;
+    dcterms:temporal [ ] ;
+    dcterms:title "Treibhausgasemissionen nach Sektor und Gas"@de,
+        "Greenhouse gas emissions by sector and by gas"@en,
+        "Emissions de gaz à effet de serre par secteurs et par gaz"@fr,
+        "Emissioni di gas serra per settore e per gas"@it ;
+    void:sparqlEndpoint <https://environment.ld.admin.ch/query> ;
+    schema1:about <https://register.ld.admin.ch/foen/theme/8> ;
+    schema1:actionApplication [ ],
+        [ ] ;
+    schema1:contactPoint [ ] ;
+    schema1:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+    schema1:dateCreated "2022-08-31"^^xsd:date ;
+    schema1:dateModified "2023-05-24T12:10:00.524000+00:00"^^xsd:dateTime ;
+    schema1:datePublished "2023-04-11"^^xsd:date ;
+    schema1:description "Entwicklung der Treibhausgasemissionen der Schweiz seit 1990 in den Sektoren gemäss CO2-Verordnung und aufgeteilt nach Gasen. Separat ausgewiesen werden die Treibhausgasemissionen aus dem internationalen Flug- und Schiffsverkehr sowie die Treibhausgasbilanz der Landnutzung (Böden, Vegetation)."@de,
+        "Evolution of Switzerland’s greenhouse gas emissions since 1990 in the sectors in accordance with the CO2 Ordinance and broken down by gas. The greenhouse gas emissions from international aviation and navigation as well as the greenhouse gas balance from land use (soil, vegetation) are shown separately."@en,
+        "Évolution des émissions de gaz à effet de serre de la Suisse depuis 1990 dans les secteurs définis dans l’ordonnance sur le CO2 et réparties par gaz. Les émissions de gaz à effet de serre générées par l’aviation et la navigation internationales et le bilan des gaz à effet de serre lié à l’utilisation des terres (sols, végétation) sont présentées de manière distincte."@fr,
+        "Evoluzione delle emissioni di gas serra della Svizzera dal 1990 nei settori conformemente all’ordinanza sul CO2 e suddivise per gas. Vengono riportate separatamente le emissioni di gas serra generate dal trasporto aereo e navale internazionale come pure il bilancio dei gas serra da uso del territorio (suoli, vegetazione)."@it ;
+    schema1:name "Treibhausgasemissionen nach Sektor und Gas"@de,
+        "Greenhouse gas emissions by sector and by gas"@en,
+        "Emissions de gaz à effet de serre par secteurs et par gaz"@fr,
+        "Emissioni di gas serra per settore e per gas"@it ;
+    schema1:version 4 ;
+    schema1:workExample [ ],
+        [ ],
+        <https://ld.admin.ch/application/visualize> ;
+    dcat:accessURL <https://environment.ld.admin.ch/sparql> ;
+    dcat:contactPoint [ ] ;
+    dcat:landingPage "https://www.bafu.admin.ch/treibhausgasinventar"^^xsd:string ;
+    dcat:theme <https://register.ld.admin.ch/opendataswiss/category/territory> ;
+    cube:observationConstraint <https://environment.ld.admin.ch/foen/ubd000502/4/shape/> ;
+    cube:observationSet <https://environment.ld.admin.ch/foen/ubd000502/4/observation/> ;
+    :datasetNextDateModified "2023-04-15"^^xsd:date ;
+    :euDataTheme <http://publications.europa.eu/resource/authority/data-theme/ENVI> .
+
+<https://environment.ld.admin.ch/foen/ubd000502/4/shape/> a sh:NodeShape,
+        cube:Constraint ;
+    sh:closed true ;
+    sh:property [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:NominalScale ;
+            schema1:name "Treibhausgas"@de,
+                "Greenhouse gas"@en,
+                "Gaz à effet de serre"@fr,
+                "Gas serra"@it ;
+            sh:in ( <https://ld.admin.ch/cube/dimension/pol01air/pol11> <https://ld.admin.ch/cube/dimension/pol01air/pol9> <https://ld.admin.ch/cube/dimension/pol01air/pol20> <https://ld.admin.ch/cube/dimension/pol01air/pol12> <https://ld.admin.ch/cube/dimension/pol01air/pol15> <https://ld.admin.ch/cube/dimension/pol01air/pol16> <https://ld.admin.ch/cube/dimension/pol01air/pol14> <https://ld.admin.ch/cube/dimension/testdimension/polgroup2> <https://ld.admin.ch/cube/dimension/testdimension/test1> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path <https://environment.ld.admin.ch/foen/ubd000502/gas> ;
+            default1:inHierarchy [ ] ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:NominalScale ;
+            schema1:name "Emissionsquelle"@de,
+                "Source of emission"@en,
+                "Source d'émission"@fr,
+                "Fonte di emissioni"@it ;
+            sh:in ( <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/2> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/11> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/12> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/13> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/14> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/31> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/32> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/33> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/34> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/35> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/36> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/37> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/38> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/111> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/112> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/121> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/122> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/123> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/124> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/131> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/132> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/141> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/142> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/143> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1421> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1422> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1423> <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1424> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path <https://environment.ld.admin.ch/foen/ubd000502/sektorid> ;
+            default1:inHierarchy [ ] ],
+        [ ] .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/111> a schema1:DefinedTerm ;
+    schema1:identifier "111"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Haushalte"@de,
+        "Households"@en,
+        "Ménages"@fr,
+        "Economie domestiche"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/11> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/112> a schema1:DefinedTerm ;
+    schema1:identifier "112"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Dienstleistungen"@de,
+        "Services"@en,
+        "Services"@fr,
+        "Servizi"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/11> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/121> a schema1:DefinedTerm ;
+    schema1:identifier "121"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Nationaler Flugverkehr"@de,
+        "National aviation"@en,
+        "Transport aérien national"@fr,
+        "Trasporto aereo nazionale"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/12> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/122> a schema1:DefinedTerm ;
+    schema1:identifier "122"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Übriger Verkehr"@de,
+        "Other transport"@en,
+        "Autre transport"@fr,
+        "Altri trasporti"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/12> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/123> a schema1:DefinedTerm ;
+    schema1:identifier "123"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Güterverkehr"@de,
+        "Freight transport"@en,
+        "Transport de marchandises"@fr,
+        "Trasporto merci"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/12> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/124> a schema1:DefinedTerm ;
+    schema1:identifier "124"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Personenverkehr"@de,
+        "Passenger transport"@en,
+        "Transport de passagers"@fr,
+        "Trasporto passeggeri"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/12> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/131> a schema1:DefinedTerm ;
+    schema1:identifier "131"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Industrie (ohne Abfallverbrennung)"@de,
+        "Industry (without waste incineration)"@en,
+        "Industrie (sans combustion des déchets)"@fr,
+        "Industria (senza incenerimento di rifiuti)"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/13> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/132> a schema1:DefinedTerm ;
+    schema1:identifier "132"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Abfallverbrennung"@de,
+        "Waste incineration"@en,
+        "Combustion des déchets"@fr,
+        "Incenerimento di rifiuti"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/13> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/141> a schema1:DefinedTerm ;
+    schema1:identifier "141"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Landwirtschaft"@de,
+        "Agriculture"@en,
+        "Agriculture"@fr,
+        "Agricoltura"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/14> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1421> a schema1:DefinedTerm ;
+    schema1:identifier "1421"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Abfalldeponien"@de,
+        "Solid waste disposal"@en,
+        "Décharges"@fr,
+        "Discariche"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/142> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1422> a schema1:DefinedTerm ;
+    schema1:identifier "1422"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Abwasserreinigung"@de,
+        "Wastewater treatment and discharge"@en,
+        "Épuration des eaux usées"@fr,
+        "Depurazione delle acque di scarico"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/142> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1423> a schema1:DefinedTerm ;
+    schema1:identifier "1423"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Biologische Verarbeitung"@de,
+        "Biological treatment of solid waste"@en,
+        "Traitement biologique"@fr,
+        "Trattamento biologico"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/142> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1424> a schema1:DefinedTerm ;
+    schema1:identifier "1424"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Übrige Verbrennung"@de,
+        "Incineration and open burning of waste"@en,
+        "Autre incinération"@fr,
+        "Altro incenerimento"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/142> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/143> a schema1:DefinedTerm ;
+    schema1:identifier "143"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Synthetische Gase"@de,
+        "Synthetic gases"@en,
+        "Gaz synthétiques"@fr,
+        "Gas sintetici"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/14> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/2> a schema1:DefinedTerm ;
+    schema1:identifier "2"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Internationaler Flugverkehr (im Total nicht enthalten)"@de,
+        "International aviation (not included in total)"@en,
+        "Transport aérien international (non inclus dans le total)"@fr,
+        "Trasporto aereo internazionale (non incluso nel totale)"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/31> a schema1:DefinedTerm ;
+    schema1:identifier "31"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Wald"@de,
+        "Forest land"@en,
+        "Forêts"@fr,
+        "Foreste"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/32> a schema1:DefinedTerm ;
+    schema1:identifier "32"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Ackerland"@de,
+        "Cropland"@en,
+        "Terres cultivées"@fr,
+        "Terreni coltivi"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/33> a schema1:DefinedTerm ;
+    schema1:identifier "33"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Grünland"@de,
+        "Grassland"@en,
+        "Prairies"@fr,
+        "Superfici inerbite"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/34> a schema1:DefinedTerm ;
+    schema1:identifier "34"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Feuchtgebiete"@de,
+        "Wetlands"@en,
+        "Zones humides"@fr,
+        "Zone umide"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/35> a schema1:DefinedTerm ;
+    schema1:identifier "35"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Siedlungen"@de,
+        "Settlements"@en,
+        "Habitations"@fr,
+        "Superfici insediative"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/36> a schema1:DefinedTerm ;
+    schema1:identifier "36"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Unproduktive Flächen"@de,
+        "Unproductive land"@en,
+        "Surfaces non productives"@fr,
+        "Superfici improduttive"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/37> a schema1:DefinedTerm ;
+    schema1:identifier "37"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Holzprodukte"@de,
+        "Harvested wood products"@en,
+        "Produits en bois"@fr,
+        "Prodotti di legno"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/38> a schema1:DefinedTerm ;
+    schema1:identifier "38"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Leaching (N2O)"@de,
+        "Leaching (N2O)"@en,
+        "Leaching (N2O)"@fr,
+        "Leaching (N2O)"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol12> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "N2O"^^xsd:string ;
+    schema1:identifier "N2O"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Distickstoffoxid"@de,
+        "Nitrous oxide"@en,
+        "Oxyde nitreux"@fr,
+        "Ossido di diazoto"@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/test1> .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol14> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "SF6"^^xsd:string ;
+    schema1:identifier "SF6"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Schwefelhexafluorid"@de,
+        "Sulphur hexafluoride"@en,
+        "Hexafluorure de soufre"@fr,
+        "Esafluoruro di zolfo"@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/polgroup2> .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol15> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "NF3"^^xsd:string ;
+    schema1:identifier "NF3"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Stickstofftrifluorid"@de,
+        "Nitrogen trifluoride"@en,
+        "Trifluorure d'azote"@fr,
+        "Trifluoruro di azoto "@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/polgroup2> .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol16> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "PFC"^^xsd:string ;
+    schema1:identifier "PFC"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Perfluorierte Kohlenwasserstoffe"@de,
+        "Perfluorocarbons"@en,
+        "Hydrocarbures perfluorés"@fr,
+        "Perfluorocarburi"@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/polgroup2> .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol20> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "HFC"^^xsd:string ;
+    schema1:identifier "HFC"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Teilhalogenierte Fluor-Kohlenwasserstoffe"@de,
+        "Hydrofluorocarbons"@en,
+        "Fluorocarbures partiellement halogénés"@fr,
+        "Idrofluorocarburi parzialmente alogenati "@it ;
+    schema1:validFrom "2022-09-22T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/polgroup2> .
+
+() a rdf:List ;
+    rdfs:label "nil"^^xsd:string ;
+    rdfs:comment "The empty list, with no items in it. If the rest of a list is nil then the list has no more items in it."^^xsd:string ;
+    rdfs:isDefinedBy rdf: .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol11> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "CH4"^^xsd:string ;
+    schema1:identifier "CH4"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Methan"@de,
+        "Methane"@en,
+        "Méthane"@fr,
+        "Metano"@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/test1> .
+
+<https://ld.admin.ch/cube/dimension/pol01air/pol9> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:alternateName "CO2"^^xsd:string ;
+    schema1:identifier "CO2"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pol01air> ;
+    schema1:name "Kohlendioxid"@de,
+        "Carbon dioxide"@en,
+        "Dioxyde de carbone"@fr,
+        "Biossido di carbonio"@it ;
+    schema1:validFrom "2022-07-05T06:17:38.898000+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/test1> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/11> a schema1:DefinedTerm ;
+    schema1:identifier "11"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Gebäude"@de,
+        "Buildings"@en,
+        "Bâtiment"@fr,
+        "Edifici"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/13> a schema1:DefinedTerm ;
+    schema1:identifier "13"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Industrie"@de,
+        "Industry"@en,
+        "Industrie"@fr,
+        "Industria"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/14> a schema1:DefinedTerm ;
+    schema1:identifier "14"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Übrige"@de,
+        "Other"@en,
+        "Autres"@fr,
+        "Altre fonti"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1> a schema1:DefinedTerm ;
+    schema1:identifier "1"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Treibhausgasemissionen der Schweiz"@de,
+        "Switzerland’s greenhouse gas emissions"@en,
+        "Émissions de gaz à effet de serre de la Suisse"@fr,
+        "Emissioni di gas serra della Svizzera"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/12> a schema1:DefinedTerm ;
+    schema1:identifier "12"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Verkehr"@de,
+        "Transport"@en,
+        "Transports"@fr,
+        "Trasporti"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/1> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/142> a schema1:DefinedTerm ;
+    schema1:identifier "142"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Abfall"@de,
+        "Waste"@en,
+        "Déchets"@fr,
+        "Rifiuti"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/14> .
+
+<https://ld.admin.ch/cube/dimension/testdimension/polgroup2> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:identifier "SyntGases"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/testdimension> ;
+    schema1:name "Synthetische Gase"@de,
+        "Synthetic gases"@en,
+        "Gaz synthétiques"@fr,
+        "Gas sintetici"@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:broader <https://ld.admin.ch/cube/dimension/testdimension/test1> .
+
+<https://ld.admin.ch/cube/dimension/testdimension/test1> a schema1:DefinedTerm,
+        <http://www.w3.org/ns/hydra/core#Resource>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimensionTerm> ;
+    schema1:identifier "GHG"^^xsd:string ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/testdimension> ;
+    schema1:name "alle Treibhausgase"@de,
+        "All greenhouse gas"@en,
+        "Tous les gaz à effet de serre"@fr,
+        "Tutti i gas serra"@it ;
+    schema1:validFrom "2022-09-07T22:00:00+00:00"^^xsd:dateTime ;
+    skos:narrower <https://ld.admin.ch/cube/dimension/pol01air/pol11>,
+        <https://ld.admin.ch/cube/dimension/pol01air/pol9> .
+
+<https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance/3> a schema1:DefinedTerm ;
+    schema1:identifier "3"^^xsd:string ;
+    schema1:inDefinedTermSet <https://environment.ld.admin.ch/vocabulary/ghg_emission_sectors_co2_ordinance> ;
+    schema1:name "Bilanz der Landnutzung (im Total nicht enthalten)"@de,
+        "Balance of land use (not included in total)"@en,
+        "Bilan lié à l’utilisation des terres (non inclus dans le total)"@fr,
+        "Bilancio da uso del territorio (non incluso nel totale)"@it ;
+    schema1:validFrom "2022-10-25T00:00:00+00:00"^^xsd:dateTime .
+
+
