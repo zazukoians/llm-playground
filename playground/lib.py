@@ -59,7 +59,7 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
     {cubes}
     """
 
-    human_template = "Select a cube, which would be best to answer following question: {question}"
+    human_template = "Select a cube, which would be best to answer following question: {question}. Return cube ID."
 
     cube_selection_prompt = ChatPromptTemplate.from_messages([
         ("system", cubes_description),
