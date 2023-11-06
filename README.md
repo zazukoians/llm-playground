@@ -1,6 +1,6 @@
-# Installation guide
+# Installation guide (tested on Python 3.10)
 
-1. Install python (min. version 3.10)
+1. Install python
 2. Install poetry globally
 
 ```
