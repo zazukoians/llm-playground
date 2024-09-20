@@ -1,10 +1,70 @@
 import re
+from typing import Any, Dict, Optional, Union
 
 import SPARQLWrapper
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts.chat import ChatPromptTemplate
+from langchain.schema import AgentAction, AgentFinish
+
+
+class LoggingHandler(BaseCallbackHandler):
+    """Callback Handler that writes logger"""
+
+    def __init__(
+        self, logger
+    ) -> None:
+        """Initialize callback handler."""
+        self.logger = logger
+
+    def __del__(self) -> None:
+        """Destructor to cleanup when done."""
+        pass
+
+    def on_chain_start(
+        self, serialized: Dict[str, Any], inputs: Dict[str, Any], **kwargs: Any
+    ) -> None:
+        """Print out that we are entering a chain."""
+        class_name = serialized.get("name", serialized.get("id", ["<unknown>"])[-1])
+        self.logger.info(f"Entering new {class_name} chain...")
+
+    def on_chain_end(self, outputs: Dict[str, Any], **kwargs: Any) -> None:
+        """Print out that we finished a chain."""
+        self.logger.info(f"Finished chain.")
+
+    def on_agent_action(
+        self, action: AgentAction, color: Optional[str] = None, **kwargs: Any
+    ) -> Any:
+        """Run on agent action."""
+        self.logger.info(action.log)
+
+    def on_tool_end(
+        self,
+        output: str,
+        color: Optional[str] = None,
+        observation_prefix: Optional[str] = None,
+        llm_prefix: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
+        """If not the final action, print out observation."""
+        if observation_prefix is not None:
+            self.logger.info(observation_prefix)
+        self.logger.info(output)
+        if llm_prefix is not None:
+            self.logger.info(llm_prefix)
+
+    def on_text(
+        self, text: str, color: Optional[str] = None, end: str = "", **kwargs: Any
+    ) -> None:
+        """Run when agent ends."""
+        self.logger.info(text)
+
+    def on_agent_finish(
+        self, finish: AgentFinish, color: Optional[str] = None, **kwargs: Any
+    ) -> None:
+        """Run on agent end."""
+        self.logger.info(finish.log)
 
 
 def run_query(query: str, return_format: str = SPARQLWrapper.JSON):

@@ -1,3 +1,7 @@
+# Important
+
+This code base uses OpenAI API Key. To make te code functional you need to set environment variable OPENAI_API_KEY to proper key for OpenAI service.
+
 # Installation guide (tested on Python 3.10)
 
 1. Install python
@@ -27,16 +31,24 @@ poetry install --no-root
 
 6. Recommended way to run: Visual Studio Code with Python etensions installed. Allows to run playground/full_pipelne.ipynb notebook.
 
+# Installation guid for API version
 
-# Description
+1. Build image:
 
-This project aims to support a user inexperienced in using the SPARQL language. It allows you to generate a SPARQL query based on a question asked in a natural language. The project was developed using large language models and knowledge graphs, with the support of prompt engineering techniques.
+```
+docker build -t zazuko/sparql-ai-api .
+```
+
+2. Run image (note that OPENAI_API_KEY should be placed in .env file to make this work):
+
+```
+docker run -p 8080:80 --env-file .env zazuko/sparql-ai-api
+```
 
 # Next steps
 
 ## Productize the model.
 The goal is to make our prototype accessible to everyone. Steps:
-- Dockerize into an API
 - Stabilize by selecting detailed GPT model versions
 - Logging - keep track of all the questions users asked
 - Build UI
@@ -59,6 +71,3 @@ The goal is to test whether alternative approaches can improve model performance
 - Test soft prompt generation
 - Add preprocessing to user question to remove unnecessary words and leave only words that have any valuable meaning
 - Extension for langchain library for knowledge graphs: make KGs work with Retrievers mechanism in langchain
-
-
-
