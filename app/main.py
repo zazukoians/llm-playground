@@ -132,4 +132,4 @@ async def handle_form_query(request: Request, question: str = Form(...)):
     logger.info(f"Form query request: question={question}")
     cube = await _select_cube(question)
     query = await _generate_query(question, cube)
-    return templates.TemplateResponse("index.html", {"request": request, "result": query})
+    return templates.TemplateResponse("index.html", {"request": request, "cube": cube.strip('<>'), "question": question, "query": query })
