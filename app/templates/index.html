@@ -1,0 +1,21 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARQL AI API</title>
+</head>
+<body>
+    <h1>SPARQL AI API</h1>
+    <form action="/ui" method="post">
+        <label for="question">Question:</label>
+        <textarea required type="text" id="question" name="question" placeholder="get average of emission of Methane for transport between years 2007 and 2005"></textarea>
+        <button type="submit">Generate Query</button>
+    </form>
+    {% if result %}
+    <h2>Generated Query:</h2>
+    <pre>{{ result }}</pre>
+    {% endif %}
+</body>
+</html>
