@@ -2,7 +2,8 @@ import logging
 import os
 
 from fastapi import FastAPI, HTTPException, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
@@ -31,6 +32,7 @@ class FullBody(CubeBody):
     pass
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
 
 async def _select_cube(questions: str) -> str:
@@ -122,6 +124,10 @@ def get_status():
     return {
         "status": "Service is up and running"
     }
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse("app/static/favicon.ico")
 
 @app.get("/ui", response_class=HTMLResponse)
 async def get_form(request: Request):
