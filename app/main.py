@@ -1,21 +1,17 @@
+import asyncio
 import logging
 import os
 
-from fastapi import FastAPI, HTTPException, Request, Form
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi import FastAPI, Form, HTTPException, Request
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
-from app.lib import (
-    LoggingHandler,
-    create_cube_selection_chain,
-    create_query_generation_chain,
-    fetch_cube_sample,
-    fetch_cubes_descriptions,
-    fetch_dimensions_triplets,
-    parse_all_cubes,
-)
+from app.lib import (LoggingHandler, create_cube_selection_chain,
+                     create_query_generation_chain, fetch_cube_sample,
+                     fetch_cubes_descriptions, fetch_dimensions_triplets,
+                     parse_all_cubes)
 
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 logging.basicConfig(level=logging.INFO)
@@ -35,7 +31,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
 
-async def _select_cube(questions: str) -> str:
+async def _select_cube(question: str) -> str:
     cube_selection_settings = {
         "temperature": 0.5,
         "top_p": 0.5
@@ -45,7 +41,7 @@ async def _select_cube(questions: str) -> str:
 
     # question = f"sum of emission of CO2 for industry between year 2009 and 2011"
     # question = f"get average of emission of Methane for transport between years 2007 and 2005"
-    question = "What percentage of emission was from N2O and CH4 compared to total emission?"
+    #question = "What percentage of emission was from N2O and CH4 compared to total emission?"
 
     cube_selection_response = await cube_selection_chain.ainvoke({
         "cubes": cubes,
@@ -59,8 +55,8 @@ async def _select_cube(questions: str) -> str:
     selected_cubes = parse_all_cubes(cube_selection_response)
 
     if not selected_cubes:
-        logger.warn("Failed at parsing cube id from response. Returning 404 and response as a result")
-        raise HTTPException(status_code=404, detail=f"Service was unable to select proper cube. Full response: {cube_selection_response}") 
+        logger.warning("Failed at parsing cube id from response. Returning 404 and response as a result")
+        raise HTTPException(status_code=404, detail=f"Service was unable to select proper cube. Full response: {cube_selection_response}")
 
     return selected_cubes[0]
 
@@ -111,7 +107,7 @@ async def select_cube_and_generate_query(body: FullBody):
     logger.info(f"Full generate request: {body}")
 
     selected_cube = await _select_cube(body.question)
-    
+
     query = await _generate_query(body.question, selected_cube)
     return {
         "result": query
@@ -136,6 +132,7 @@ async def get_form(request: Request):
 @app.post("/ui", response_class=HTMLResponse)
 async def handle_form_query(request: Request, question: str = Form(...)):
     logger.info(f"Form query request: question={question}")
-    cube = await _select_cube(question)
-    query = await _generate_query(question, cube)
+    body = FullBody(question=question)
+    cube = await _select_cube(body.question)
+    query = await _generate_query(body.question, cube)
     return templates.TemplateResponse("index.html", {"request": request, "cube": cube.strip('<>'), "question": question, "query": query })

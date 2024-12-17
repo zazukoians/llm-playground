@@ -50,7 +50,6 @@ docker run -p 8080:80 --env-file .env zazuko/sparql-ai-api
 ## Productize the model.
 The goal is to make our prototype accessible to everyone. Steps:
 - Logging - keep track of all the questions users asked
-- Error handling - return error when cube with relevant information cannot be found, or when subject is out of scope
 - Introduce caching - question that was already asked, will be answered based on cached results of GPT API
 - Add third step in pipeline - generate answer based on data returned by the generated SPARQL query
 

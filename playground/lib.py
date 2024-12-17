@@ -55,8 +55,24 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
     cube_selection_model = ChatOpenAI(openai_api_key=api_key, model="gpt-4o-mini", temperature=temperature, top_p=top_p)
 
     cubes_description = """
-    Given following data cubes with its labels and description:
+        You are a precise cube selector that helps find the most appropriate data cube for a given question.
+    You will be provided with a list of data cubes, their labels, and descriptions:
     {cubes}
+
+    Instructions:
+    1. Analyze the question carefully and identify the key information needs
+    2. Review available cubes and their descriptions thoroughly
+    3. Return ONLY the cube ID if you are highly confident (90%+) that:
+       - The cube's data directly answers the main aspect of the question
+       - The cube's scope and granularity match the question's requirements
+       - No significant assumptions or stretches are needed to use this cube
+    4. Return "Unable to select proper cube" if:
+       - No cube precisely matches the question's requirements
+       - You need to make significant assumptions about the data's applicability
+       - The connection between the question and cube is indirect or tangential
+       - Multiple cubes could potentially answer the question
+       - You are unsure about the match
+       Give justification if you are unable to select proper cube, explaining what data is there.
     """
 
     human_template = "Select a cube, which would be best to answer following question: {question}. Return cube ID."
