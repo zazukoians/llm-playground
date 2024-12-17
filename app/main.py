@@ -1,7 +1,10 @@
 import logging
 import os
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Form
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 from app.lib import (
@@ -29,7 +32,8 @@ class FullBody(CubeBody):
     pass
 
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+templates = Jinja2Templates(directory="app/templates")
 
 async def _select_cube(questions: str) -> str:
     cube_selection_settings = {
@@ -121,3 +125,17 @@ def get_status():
         "status": "Service is up and running"
     }
 
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse("app/static/favicon.ico")
+
+@app.get("/ui", response_class=HTMLResponse)
+async def get_form(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.post("/ui", response_class=HTMLResponse)
+async def handle_form_query(request: Request, question: str = Form(...)):
+    logger.info(f"Form query request: question={question}")
+    cube = await _select_cube(question)
+    query = await _generate_query(question, cube)
+    return templates.TemplateResponse("index.html", {"request": request, "cube": cube.strip('<>'), "question": question, "query": query })

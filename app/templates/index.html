@@ -1,0 +1,49 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARQL AI API</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>SPARQL AI API</h1>
+    <select id="examples">
+        <option value="">Select an example</option>
+        <option value="get average of emission of Methane for transport between years 2007 and 2005">Get average of emission of Methane for transport between years 2007 and 2005</option>
+        <option value="sum of emission of CO2 for industry between year 2009 and 2011">Sum of emission of CO2 for industry between year 2009 and 2011</option>
+        <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
+    </select>
+    <form id="queryForm" action="/ui" method="post">
+        <label for="question">Question:</label>
+        <textarea required id="question" name="question">{{ question }}</textarea>
+        <button id="submitButton" type="submit">Generate Query</button>
+    </form>
+    <div class="spinner" id="spinner"></div>
+
+    <div id="responseContainer">
+        {% if error %}
+        <h2>Error:</h2>
+        <pre>{{ error }}</pre>
+        {% endif %}
+    
+        {% if query %}
+        <h2>Generated Query:</h2>
+        Cube: <a href="{{ cube }}">{{ cube }}</a>
+        <pre>{{ query }}</pre>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('examples').addEventListener('change', function() {
+            document.getElementById('question').value = this.value;
+        });
+        document.getElementById('queryForm').addEventListener('submit', function() {
+            document.getElementById('spinner').style.display = 'block';
+            document.getElementById('submitButton').disabled = true;
+            document.getElementById('responseContainer').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

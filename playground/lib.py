@@ -144,18 +144,15 @@ def fetch_cube_sample(cube: str) -> str:
         }}
         WHERE {{
         {{
-            SELECT (SAMPLE(?observation) AS ?s)
+            SELECT ?cube ?observationSet (SAMPLE(?observation) AS ?s)
             WHERE {{
             VALUES ?cube {{ {cube} }}
             ?cube a cube:Cube ;
                     cube:observationSet ?observationSet.
             ?observationSet cube:observation ?observation.
             }}
+            GROUP BY ?cube ?observationSet
         }}
-        ?cube a cube:Cube;
-            cube:observationSet ?observationSet.
-        ?observationSet a cube:ObservationSet;
-            cube:observation ?s.
         ?s ?p ?o .
         }}
     """
