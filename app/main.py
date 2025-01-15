@@ -1,7 +1,7 @@
-import asyncio
 import logging
 import os
 
+from collections import OrderedDict
 from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -12,11 +12,32 @@ from app.lib import (LoggingHandler, create_cube_selection_chain,
                      create_query_generation_chain, fetch_cube_sample,
                      fetch_cubes_descriptions, fetch_dimensions_triplets,
                      parse_all_cubes)
+from hashlib import md5
 
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 handler = LoggingHandler(logger)
+
+# Simple LRU cache with a maximum size
+class LRUCache:
+    def __init__(self, max_size: int):
+        self.cache = OrderedDict()
+        self.max_size = max_size
+
+    def get(self, key: str):
+        if key in self.cache:
+            self.cache.move_to_end(key)
+            return self.cache[key]
+        return None
+
+    def set(self, key: str, value: str):
+        self.cache[key] = value
+        self.cache.move_to_end(key)
+        if len(self.cache) > self.max_size:
+            self.cache.popitem(last=False)
+
+cache = LRUCache(max_size=20)
 
 class CubeBody(BaseModel):
     question: str
@@ -31,6 +52,10 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 templates = Jinja2Templates(directory="app/templates")
 
+def get_cache_key(question: str, cube: str = None) -> str:
+    key = question if cube is None else f"{question}-{cube}"
+    return md5(key.encode()).hexdigest()
+
 async def _select_cube(question: str) -> str:
     cube_selection_settings = {
         "temperature": 0.5,
@@ -38,10 +63,6 @@ async def _select_cube(question: str) -> str:
     }
     cubes = fetch_cubes_descriptions()
     cube_selection_chain = create_cube_selection_chain(api_key=OPENAI_API_KEY, handler=handler, **cube_selection_settings)
-
-    # question = f"sum of emission of CO2 for industry between year 2009 and 2011"
-    # question = f"get average of emission of Methane for transport between years 2007 and 2005"
-    #question = "What percentage of emission was from N2O and CH4 compared to total emission?"
 
     cube_selection_response = await cube_selection_chain.ainvoke({
         "cubes": cubes,
@@ -59,6 +80,15 @@ async def _select_cube(question: str) -> str:
         raise HTTPException(status_code=404, detail=f"Service was unable to select proper cube. Full response: {cube_selection_response}")
 
     return selected_cubes[0]
+
+async def _select_cube_cached(question: str) -> str:
+    key = get_cache_key(question)
+    cached = cache.get(key)
+    if cached:
+        return cached
+    cube = await _select_cube(question)
+    cache.set(key, cube)
+    return cube
 
 
 async def _generate_query(question: str, cube: str) -> str:
@@ -84,6 +114,15 @@ async def _generate_query(question: str, cube: str) -> str:
     logger.info(f"{query_generation_response}")
 
     return query_generation_response
+
+async def _generate_query_cached(question: str, cube: str) -> str:
+    key = get_cache_key(question, cube)
+    cached = cache.get(key)
+    if cached:
+        return cached
+    query = await _generate_query(question, cube)
+    cache.set(key, query)
+    return query
 
 
 @app.post("/cube")
@@ -133,6 +172,6 @@ async def get_form(request: Request):
 async def handle_form_query(request: Request, question: str = Form(...)):
     logger.info(f"Form query request: question={question}")
     body = FullBody(question=question)
-    cube = await _select_cube(body.question)
-    query = await _generate_query(body.question, cube)
+    cube = await _select_cube_cached(body.question)
+    query = await _generate_query_cached(body.question, cube)
     return templates.TemplateResponse("index.html", {"request": request, "cube": cube.strip('<>'), "question": question, "query": query })
