@@ -117,25 +117,11 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
     cubes_description = """
     Given following data cubes with its labels and description:
     {cubes}
-
-MANDATORY MATCHING RULES - YOU MUST APPLY THESE:
-1. ALWAYS treat these as equivalent:
-   - CO2, methane, etc = greenhouse gas
-   - Industry, transport, etc = sector
-   - Any year after 1990 = "since 1990"
-2. If a cube mentions:
-   - "greenhouse gas" -> it CONTAINS data for ALL greenhouse gases
-   - "sector" -> it CONTAINS data for ALL sectors
-   - "since [year]" -> it CONTAINS data for ALL years after that
-3. DO NOT look for exact matches
-4. DO NOT reject a cube because it doesn't explicitly mention specifics
-5. When multiple cubes match, choose the one with the most appropriate level of detail
-
     """
 
     human_template = """
     For this question: {question}
-    Return ONLY the cube ID that best matches these rules.
+    Return ONLY the cube ID that best matches this question.
     If no cube matches even with these mandatory rules, return 'Unable to select proper cube'
     and list all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
       """

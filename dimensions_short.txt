@@ -1,0 +1,312 @@
+<https://environment.ld.admin.ch/foen/gefahren-waldbrand-praeventionsmassnahmen-kantone/1> has dimensions:
+Warning region
+
+<https://environment.ld.admin.ch/foen/gefahren-waldbrand-warnung/1> has dimensions:
+Warning region
+
+<https://environment.ld.admin.ch/foen/holzfluss/2> has dimensions:
+Source
+Target
+Year
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1029/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+diameter at breast height (main diameter classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1030/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+diameter at breast height (in 4 cm classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1034/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+aspect (9 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1157/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+tree species (5 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1265/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+tree state (living/dead)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1266/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+tree state (standing/lying)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1282/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+giant (yes/no)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1310/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+extent of damage gaps (10 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1316/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+dominant diameter at breast height (standing-living - in 8 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1317/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+diameter at breast height (10 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1335/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+length of lying dead tree (6 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-1805/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+stem height of broken snags (6 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-20/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+development stage
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2171/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+tree age (in 40-year classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-22/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+degree of mixture (terrestrial)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2207/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+tree species (56 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2599/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+introduced tree species (tree neophytes; 3 classes; from NFI1 on)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2630/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+introduced tree species (tree neophytes; 8 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2632/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+altitudinal vegetation belts (NaiS; 10 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2633/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+altitudinal vegetation belts (NaiS; 6 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2635/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+higher/lower altitude zone
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-2637/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+forest formations (NaiS; 10 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-501/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+forest type (17 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-593/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+degree of damage
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-653/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+number of cases of damage
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-711/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+time of last treatment (in 5- or 10-year classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-894/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+site quality
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-898/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+forest type (12 classes)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-90/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+main tree species
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-94/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+ownership (2 categories)
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-96/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+conifers and broadleaves
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_C-98/cube/2024-1> has dimensions:
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+tree condition
+
+<https://environment.ld.admin.ch/foen/nfi/nfi_T-changes/cube/2024-1> has dimensions:
+Classification
+Evaluation area
+Evaluation type
+Grid
+Inventory
+Region
+
+<https://environment.ld.admin.ch/foen/ubd000502/5> has dimensions:
+Greenhouse gas
+Source of emission
+Year
+
+<https://environment.ld.admin.ch/foen/ubd000503/8> has dimensions:
+Motor fuel
+Year
+
+<https://environment.ld.admin.ch/foen/ubd000504/8> has dimensions:
+Energy carrier
+
+<https://environment.ld.admin.ch/foen/ubd003001/7> has dimensions:
+Species group
+Status IUCN
+
+<https://environment.ld.admin.ch/foen/ubd003701/5> has dimensions:
+Assessment
+Mode of transport
+Period
+Spatial Category
+Unit exposed to noise
+
+<https://environment.ld.admin.ch/foen/ubd006601/3> has dimensions:
+Heavy metal
+Municipality
+Sampling Period
+
+<https://environment.ld.admin.ch/foen/ubd01041prod/4> has dimensions:
+Date
+Observation Location
+Parameter
+
+<https://environment.ld.admin.ch/foen/ubd010701/8> has dimensions:
+Air pollutant
+Measurement station
+Temporal reference

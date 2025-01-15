@@ -50,38 +50,35 @@ def fetch_cubes_descriptions() -> str:
     raw_result = run_query(cubes_query, return_format=SPARQLWrapper.N3)
     return raw_result.decode()
 
+def fetch_dimensions() -> str:
+    with open('/home/magdalena/zazuko/llm-playground/dimensions_short.txt', 'r') as file:
+        dimensions = file.read()
+
+        return dimensions
+
+
 
 def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temperature: float = 0.5, top_p: float = 0.5) -> LLMChain:
     cube_selection_model = ChatOpenAI(openai_api_key=api_key, model="gpt-4o-mini", temperature=temperature, top_p=top_p)
 
     cubes_description = """
-    Given following data cubes with its labels and description:
+    Given following data cubes with its labels, description:
     {cubes}
+    """
 
-    MANDATORY MATCHING RULES - YOU MUST APPLY THESE:
-    1. ALWAYS treat these as equivalent:
-    - CO2, methane, etc = greenhouse gas
-    - Industry, transport, etc = sector
-    - Any year after 1990 = "since 1990"
-    2. If a cube mentions:
-    - "greenhouse gas" -> it CONTAINS data for ALL greenhouse gases
-    - "sector" -> it CONTAINS data for ALL sectors
-    - "since [year]" -> it CONTAINS data for ALL years after that
-    3. DO NOT look for exact matches
-    4. DO NOT reject a cube because it doesn't explicitly mention specifics
-    5. When multiple cubes match, choose the one with the most appropriate level of detail
-
+    cubes_dimension = """
+    And its dimensions:
+    {dimensions}
     """
 
     human_template = """
     For this question: {question}
-    Return ONLY the cube ID that best matches these rules.
-    If no cube matches even with these mandatory rules, return 'Unable to select proper cube'
-    and list all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
+    Return the cube ID that best answers this question. Justify your answer
     """
 
     cube_selection_prompt = ChatPromptTemplate.from_messages([
         ("system", cubes_description),
+        ("system", cubes_dimension),
         ("human", human_template),
     ])
 
