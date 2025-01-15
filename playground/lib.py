@@ -62,23 +62,21 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
     cube_selection_model = ChatOpenAI(openai_api_key=api_key, model="gpt-4o-mini", temperature=temperature, top_p=top_p)
 
     cubes_description = """
-    Given following data cubes with its labels, description:
+    Given following data cubes with its labels and description:
     {cubes}
-    """
-
-    cubes_dimension = """
-    And its dimensions:
-    {dimensions}
     """
 
     human_template = """
     For this question: {question}
-    Return the cube ID that best answers this question. Justify your answer
+    Return the cube ID that best answers this question. Justify your answer.
+
+    If no cube matches even with these mandatory rules, return 'Unable to select proper cube'.
+    List all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
     """
 
     cube_selection_prompt = ChatPromptTemplate.from_messages([
         ("system", cubes_description),
-        ("system", cubes_dimension),
+        #("system", cubes_dimension),
         ("human", human_template),
     ])
 
