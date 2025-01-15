@@ -50,6 +50,13 @@ def fetch_cubes_descriptions() -> str:
     raw_result = run_query(cubes_query, return_format=SPARQLWrapper.N3)
     return raw_result.decode()
 
+def fetch_dimensions() -> str:
+    with open('/home/magdalena/zazuko/llm-playground/dimensions_short.txt', 'r') as file:
+        dimensions = file.read()
+
+        return dimensions
+
+
 
 def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temperature: float = 0.5, top_p: float = 0.5) -> LLMChain:
     cube_selection_model = ChatOpenAI(openai_api_key=api_key, model="gpt-4o-mini", temperature=temperature, top_p=top_p)
@@ -59,10 +66,17 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
     {cubes}
     """
 
-    human_template = "Select a cube, which would be best to answer following question: {question}. Return cube ID."
+    human_template = """
+    For this question: {question}
+    Return the cube ID that best answers this question. Justify your answer.
+
+    If no cube matches even with these mandatory rules, return 'Unable to select proper cube'.
+    List all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
+    """
 
     cube_selection_prompt = ChatPromptTemplate.from_messages([
         ("system", cubes_description),
+        #("system", cubes_dimension),
         ("human", human_template),
     ])
 
