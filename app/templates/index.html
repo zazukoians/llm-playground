@@ -13,7 +13,10 @@
         <option value="">Select an example</option>
         <option value="get average of emission of Methane for transport between years 2007 and 2005">Get average of emission of Methane for transport between years 2007 and 2005</option>
         <option value="sum of emission of CO2 for industry between year 2009 and 2011">Sum of emission of CO2 for industry between year 2009 and 2011</option>
+        <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
         <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
+        <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
+        <option value="what bathing stations are there?">What bathing stations are there?</option>
     </select>
     <form id="queryForm" action="/ui" method="post">
         <label for="question">Question:</label>
@@ -23,15 +26,20 @@
     <div class="spinner" id="spinner"></div>
 
     <div id="responseContainer">
+
         {% if error %}
-        <h2>Error:</h2>
-        <pre>{{ error }}</pre>
-        {% endif %}
-    
-        {% if query %}
-        <h2>Generated Query:</h2>
-        Cube: <a href="{{ cube }}">{{ cube }}</a>
-        <pre>{{ query }}</pre>
+            <h2>This data is unavailable</h2>
+            {% if error is mapping %}
+                <pre>{{ error.detail }}</pre>
+            {% else %}
+                <pre>{{ error }}</pre>
+            {% endif %}
+        {% else %}
+            <h2>Generated Query:</h2>
+            {% if query %}
+            Cube: <a href="{{ cube }}">{{ cube }}</a>
+            <pre>{{ query }}</pre>
+            {% endif %}
         {% endif %}
     </div>
 

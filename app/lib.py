@@ -121,10 +121,12 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
 
     human_template = """
     For this question: {question}
-    Return the cube ID that best answers this question. Justify your answer.
+    Return the cube ID that best answers this question.Justify your answer.
 
     If no cube matches even with these mandatory rules, return 'Unable to select proper cube'.
     List all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
+
+
     """
 
     cube_selection_prompt = ChatPromptTemplate.from_messages([
@@ -156,7 +158,15 @@ def create_query_generation_chain(api_key: str, handler: BaseCallbackHandler, te
     1. Do not add any explanatory text before or after the query
     2. Do not wrap the output in code blocks or sparql tags
     3. The query should start directly with the PREFIX declarations
-    4. For year/time filtering, use these exact patterns based on the type of time constraint:
+    4. Aggregations (COUNT, SUM, AVG, MIN, MAX) can be used ONLY in the same line as SELECT.
+    5. For aggregations (COUNT, SUM, AVG, MIN, MAX), rename variable using this exact pattern:
+    (SUM(?a) AS ?sum_a)
+    (COUNT(?a) AS ?count_a)
+    (AVG(?a) AS ?avg_a)
+    (MIN(?a) AS ?min_a)
+    (MAX(?a) AS ?max_a)
+
+    6. For year/time filtering, use these exact patterns based on the type of time constraint:
 
     For a specific year range:
     FILTER(?year >= "2005"^^xsd:gYear && ?year <= "2007"^^xsd:gYear)
