@@ -1,7 +1,8 @@
 import logging
 import os
-
 from collections import OrderedDict
+from hashlib import md5
+
 from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -12,7 +13,6 @@ from app.lib import (LoggingHandler, create_cube_selection_chain,
                      create_query_generation_chain, fetch_cube_sample,
                      fetch_cubes_descriptions, fetch_dimensions_triplets,
                      parse_all_cubes)
-from hashlib import md5
 
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 logging.basicConfig(level=logging.INFO)
@@ -77,7 +77,7 @@ async def _select_cube(question: str) -> str:
 
     if not selected_cubes:
         logger.warning("Failed at parsing cube id from response. Returning 404 and response as a result")
-        raise HTTPException(status_code=404, detail=f"Service was unable to select proper cube. Full response: {cube_selection_response}")
+        raise HTTPException(status_code=404, detail=cube_selection_response)
 
     return selected_cubes[0]
 
@@ -171,7 +171,19 @@ async def get_form(request: Request):
 @app.post("/ui", response_class=HTMLResponse)
 async def handle_form_query(request: Request, question: str = Form(...)):
     logger.info(f"Form query request: question={question}")
-    body = FullBody(question=question)
-    cube = await _select_cube_cached(body.question)
-    query = await _generate_query_cached(body.question, cube)
-    return templates.TemplateResponse("index.html", {"request": request, "cube": cube.strip('<>'), "question": question, "query": query })
+    try:
+        body = FullBody(question=question)
+        cube = await _select_cube_cached(body.question)
+        query = await _generate_query_cached(body.question, cube)
+        return templates.TemplateResponse("index.html", {
+            "request": request,
+            "cube": cube.strip('<>'),
+            "question": question,
+            "query": query
+        })
+    except HTTPException as e:
+        return templates.TemplateResponse("index.html", {
+            "request": request,
+            "question": question,
+            "error": e.detail
+        })
