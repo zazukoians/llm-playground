@@ -121,7 +121,7 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
 
     human_template = """
     For this question: {question}
-    Return the cube ID that best answers this question.Justify your answer.
+    Return the cube ID that best answers this question. Justify your answer.
 
     If no cube matches even with these mandatory rules, return 'Unable to select proper cube'.
     List all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
