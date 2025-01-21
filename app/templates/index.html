@@ -1,5 +1,4 @@
 <!-- templates/index.html -->
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +21,6 @@
             max-width: 800px;
             margin: 2rem auto 3rem auto;
             padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .intro-section h2 {
@@ -57,6 +53,45 @@
             color: #666;
         }
 
+        .query-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .query-container {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;  /* Changed from flex-start */
+            width: 100%;
+        }
+
+        .question-container {
+            flex: 1;
+            display: flex;           /* Added */
+            flex-direction: column;  /* Added */
+        }
+
+        #queryForm {
+            display: flex;           /* Added */
+            flex-direction: column;  /* Added */
+            height: 100%;           /* Added */
+        }
+
+        #question {
+            width: 100%;
+            min-height: 100px;
+            margin-top: 0.5rem;
+        }
+
+        #examples {
+            width: 250px;
+            flex-shrink: 0;         /* Added */
+        }
+
         .execute-button-container {
             display: flex;
             justify-content: flex-start;
@@ -85,8 +120,6 @@
         .execute-button i {
             font-size: 1rem;
         }
-
-        /* Existing styles remain the same */
     </style>
 </head>
 <body>
@@ -101,24 +134,30 @@
         </div>
 
         <p>The datasets cover Swiss environmental data across various domains:
-            from air quality and noise pollution, to forest health indicators, greenhouse gas emissions, environmental risks, and water quality. </p>
-        <p class="final-note">        <p>>Type your question or choose from our examples</p>
+            from air quality and noise pollution, to forest health indicators, greenhouse gas emissions, environmental risks, and water quality.</p>
+        <p class="final-note">Type your question or choose from our examples</p>
     </div>
 
-    <!-- Rest of the HTML remains the same -->
-    <select id="examples">
-        <option value="">Select an example</option>
-        <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
-        <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
-        <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
-        <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
-        <option value="what bathing stations are there?">What bathing stations are there?</option>
-    </select>
-    <form id="queryForm" action="/ui" method="post">
-        <label for="question">Question:</label>
-        <textarea required id="question" name="question">{{ question }}</textarea>
-        <button id="submitButton" type="submit">Generate Query</button>
-    </form>
+    <div class="query-section">
+        <div class="query-container">
+            <div class="question-container">
+                <form id="queryForm" action="/ui" method="post">
+                    <label for="question">Question:</label>
+                    <textarea required id="question" name="question">{{ question }}</textarea>
+                    <button id="submitButton" type="submit">Generate Query</button>
+                </form>
+            </div>
+            <select id="examples">
+                <option value="">Select an example</option>
+                <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
+                <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
+                <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
+                <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
+                <option value="what bathing stations are there?">What bathing stations are there?</option>
+            </select>
+        </div>
+    </div>
+
     <div class="spinner" id="spinner"></div>
 
     <div id="responseContainer">
