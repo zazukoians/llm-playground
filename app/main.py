@@ -170,7 +170,20 @@ async def get_form(request: Request):
 
 @app.post("/ui", response_class=HTMLResponse)
 async def handle_form_query(request: Request, question: str = Form(...)):
-    logger.info(f"Form query request: question={question}")
+
+    forwarded_for = request.headers.get("X-Forwarded-For", "not set")
+    logger.info("========== BROWSER DATA ================")
+    x_forwarded_for = request.headers.get("X-Forwarded-For", "not set")
+    x_real_ip = request.headers.get("X-Real-IP", "not set")
+    client_host = request.client.host if request.client else "no client"
+
+    logger.info(
+        f"Form query request: question={question}, "
+        f"X-Forwarded-For={x_forwarded_for}, "
+        f"X-Real-IP={x_real_ip}, "
+        f"client_host={client_host}"
+    )
+
     try:
         body = FullBody(question=question)
         cube = await _select_cube_cached(body.question)

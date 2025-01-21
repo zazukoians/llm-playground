@@ -21,4 +21,4 @@ ENV VIRTUAL_ENV=/code/venv
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 EXPOSE 80
 
-ENTRYPOINT ["python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+ENTRYPOINT ["python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80", "--forwarded-allow-ips", "*"]
