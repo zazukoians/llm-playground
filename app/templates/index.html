@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write SPARQL with AI</title>
     <link rel="stylesheet" href="/static/styles.css">
-    <!-- Add FontAwesome for the play icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .execute-button-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
             margin: 2rem 0;
+            padding-left: 80%; /* Position button at 80% from left */
         }
 
         .execute-button {
@@ -91,6 +91,7 @@
             document.getElementById('responseContainer').style.display = 'none';
         });
 
+        // Handle query URL generation if query exists
         const queryElement = document.getElementById('generatedQuery');
         const executeButton = document.getElementById('executeButton');
 
@@ -114,11 +115,17 @@
                 .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
                 .join('&');
 
-            // Create the full URL with the correct format
+            // Create the full URL
             const queryUrl = `https://lindas.admin.ch/sparql/#${encodedParams}`;
 
             executeButton.href = queryUrl;
             executeButton.style.display = 'inline-flex';
+
+            // Scroll to bottom of page
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
