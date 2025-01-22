@@ -10,6 +10,24 @@
 <body>
     <h1>Write SPARQL queries with AI</h1>
 
+    <!-- Process Mini-Bar -->
+    <div class="process-mini-bar">
+        <div class="process-mini-step active">
+            <div class="mini-step-number">1</div>
+            <div class="mini-step-label">Ask</div>
+        </div>
+        <div class="mini-step-separator"></div>
+        <div class="process-mini-step">
+            <div class="mini-step-number">2</div>
+            <div class="mini-step-label">Generate</div>
+        </div>
+        <div class="mini-step-separator"></div>
+        <div class="process-mini-step">
+            <div class="mini-step-number">3</div>
+            <div class="mini-step-label">View</div>
+        </div>
+    </div>
+
     <!-- Steps Indicator with data-step attributes -->
     <div class="steps-container">
         <div class="steps">
@@ -54,7 +72,7 @@
                         required
                         id="question"
                         name="question"
-                        placeholder="Example: What was the air quality in Zurich last year?">{{ question }}</textarea>
+                        placeholder="Example: What bathing stations are there?">{{ question }}</textarea>
                     <button id="submitButton" type="submit">Generate Query</button>
                 </form>
             </div>
@@ -70,6 +88,8 @@
                     <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
                     <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
                     <option value="what bathing stations are there?">What bathing stations are there?</option>
+                    <option value="Compare water quality across locations">Compare water quality across locations</option>
+                    <option value="Show me trends in emissions of greenhouse gases">Show me trends in emissions of greenhouse gases</option>
                 </select>
             </div>
         </div>
@@ -104,17 +124,21 @@
         // Process Header State Management
         function updateProcessHeader(currentStep) {
             const steps = document.querySelectorAll('.step');
-
             steps.forEach(step => {
                 const stepNumber = parseInt(step.getAttribute('data-step'));
-
-                // Remove all states first
                 step.classList.remove('active', 'completed');
-
-                // Add appropriate state
                 if (stepNumber < currentStep) {
                     step.classList.add('completed');
                 } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+
+            // Update mini-bar
+            const miniSteps = document.querySelectorAll('.process-mini-step');
+            miniSteps.forEach((step, index) => {
+                step.classList.remove('active');
+                if (index + 1 === currentStep) {
                     step.classList.add('active');
                 }
             });
@@ -122,9 +146,9 @@
 
         // Rotating placeholders
         const placeholders = [
-            "Example: What was the air quality in Zurich last year?",
-            "Example: Show me forest health trends in Basel",
-            "Example: Compare water quality across Swiss cantons"
+            "Example: What swiss bathing stations had poor water quality in 2020?",
+            "Example: Show me trends in emissions of greenhouse gases",
+            "Example: Compare water quality across locations"
         ];
         let currentPlaceholder = 0;
         const questionInput = document.getElementById('question');

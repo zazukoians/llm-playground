@@ -19,6 +19,56 @@ h1 {
     color: #333;
 }
 
+/* Process Mini-Bar */
+.process-mini-bar {
+    position: sticky;
+    top: 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 12px 24px;
+    margin: 0 -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.process-mini-step {
+    display: flex;
+    align-items: center;
+    margin: 0 16px;
+    color: #666;
+}
+
+.process-mini-step.active {
+    color: #2E7D32;
+}
+
+.mini-step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.active .mini-step-number {
+    background: #2E7D32;
+    color: white;
+}
+
+.mini-step-separator {
+    width: 32px;
+    height: 2px;
+    background: #e0e0e0;
+    margin: 0 8px;
+}
+
 /* Steps styling */
 .steps-container {
     max-width: 800px;
@@ -134,8 +184,8 @@ h1 {
     margin: 0 auto;
     padding: 2rem;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     box-sizing: border-box;
 }
 
@@ -148,16 +198,17 @@ h1 {
     width: 100%;
     background: transparent;
     box-sizing: border-box;
+    margin-bottom: 24px;
 }
 
 #question {
     width: 100%;
     min-height: 120px;
-    padding: 16px;
-    border: 1px solid #E0E0E0;
+    padding: 20px;
+    border: 2px solid #2E7D32;
     border-radius: 8px;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.1rem;
+    line-height: 1.6;
     resize: vertical;
     box-sizing: border-box;
     transition: all 0.2s ease-in-out;
@@ -171,8 +222,8 @@ h1 {
 
 #question:focus {
     outline: none;
-    border-color: #2E7D32;
-    background-color: #FAFAFA;
+    border-color: #1B5E20;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
 }
 
 /* Connector */
@@ -217,20 +268,23 @@ h1 {
 /* Button styling */
 #submitButton {
     margin-top: 1.5rem;
-    padding: 12px 24px;
+    padding: 14px 28px;
     background-color: #1B5E20;
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
 #submitButton:hover {
     background-color: #2E7D32;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
 button:disabled {
@@ -294,6 +348,18 @@ pre {
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+    .process-mini-bar {
+        padding: 8px 12px;
+    }
+
+    .mini-step-label {
+        display: none;
+    }
+
+    .mini-step-separator {
+        width: 20px;
+    }
+
     .query-section {
         padding: 1rem;
     }
