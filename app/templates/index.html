@@ -10,44 +10,28 @@
 <body>
     <h1>Write SPARQL queries with AI</h1>
 
-    <!-- Process Mini-Bar -->
-    <div class="process-mini-bar">
-        <div class="process-mini-step active">
-            <div class="mini-step-number">1</div>
-            <div class="mini-step-label">Ask</div>
-        </div>
-        <div class="mini-step-separator"></div>
-        <div class="process-mini-step">
-            <div class="mini-step-number">2</div>
-            <div class="mini-step-label">Generate</div>
-        </div>
-        <div class="mini-step-separator"></div>
-        <div class="process-mini-step">
-            <div class="mini-step-number">3</div>
-            <div class="mini-step-label">View</div>
-        </div>
-    </div>
-
     <!-- Steps Indicator with data-step attributes -->
     <div class="steps-container">
-        <div class="steps">
-            <div class="step active" data-step="1">
-                <div class="step-icon">
-                    <i class="fas fa-question"></i>
+        <div class="steps-inner">
+            <div class="steps">
+                <div class="step active" data-step="1">
+                    <div class="step-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <span class="step-text">Ask Question</span>
                 </div>
-                <span class="step-text">Ask Question</span>
-            </div>
-            <div class="step" data-step="2">
-                <div class="step-icon">
-                    <i class="fas fa-code"></i>
+                <div class="step" data-step="2">
+                    <div class="step-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="step-text">Generate Query</span>
                 </div>
-                <span class="step-text">Generate Query</span>
-            </div>
-            <div class="step" data-step="3">
-                <div class="step-icon">
-                    <i class="fas fa-chart-bar"></i>
+                <div class="step" data-step="3">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <span class="step-text">View Data</span>
                 </div>
-                <span class="step-text">View Data</span>
             </div>
         </div>
     </div>
@@ -106,22 +90,32 @@
                 <pre>{{ error }}</pre>
             {% endif %}
         {% else %}
-            <h2>Generated Query:</h2>
-            {% if query %}
-            Cube: <a href="{{ cube }}">{{ cube }}</a>
-            <pre id="generatedQuery">{{ query }}</pre>
-            <div class="execute-button-container">
-                <a id="executeButton" href="" target="_blank" style="display: none;" class="execute-button">
-                    <i class="fas fa-play"></i>
-                    Execute Query
-                </a>
+            <div id="queryResultSection">
+                <h2>Generated Query:</h2>
+                {% if query %}
+                Cube: <a href="{{ cube }}">{{ cube }}</a>
+                <pre id="generatedQuery">{{ query }}</pre>
+                <div class="execute-button-container">
+                    <a id="executeButton" href="" target="_blank" style="display: none;" class="execute-button">
+                        <i class="fas fa-play"></i>
+                        Execute Query
+                    </a>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         {% endif %}
     </div>
 
     <script>
-        // Process Header State Management
+        window.addEventListener('scroll', function() {
+            const container = document.querySelector('.steps-container');
+            if (window.scrollY > 0) {
+                container.classList.add('sticky');
+            } else {
+                container.classList.remove('sticky');
+            }
+        });
+
         function updateProcessHeader(currentStep) {
             const steps = document.querySelectorAll('.step');
             steps.forEach(step => {
@@ -133,18 +127,8 @@
                     step.classList.add('active');
                 }
             });
-
-            // Update mini-bar
-            const miniSteps = document.querySelectorAll('.process-mini-step');
-            miniSteps.forEach((step, index) => {
-                step.classList.remove('active');
-                if (index + 1 === currentStep) {
-                    step.classList.add('active');
-                }
-            });
         }
 
-        // Rotating placeholders
         const placeholders = [
             "Example: What swiss bathing stations had poor water quality in 2020?",
             "Example: Show me trends in emissions of greenhouse gases",
@@ -160,27 +144,23 @@
 
         setInterval(rotatePlaceholder, 5000);
 
-        // Handle example selection
         document.getElementById('examples').addEventListener('change', function() {
             document.getElementById('question').value = this.value;
         });
 
-        // Handle form submission
         document.getElementById('queryForm').addEventListener('submit', function() {
             document.getElementById('spinner').style.display = 'block';
             document.getElementById('submitButton').disabled = true;
             document.getElementById('responseContainer').style.display = 'none';
-
-            // Update process header to step 2
             updateProcessHeader(2);
         });
 
-        // Handle query URL generation
         const queryElement = document.getElementById('generatedQuery');
         const executeButton = document.getElementById('executeButton');
 
         if (queryElement && executeButton) {
             const query = queryElement.textContent;
+            document.getElementById('queryResultSection').style.display = 'block';
 
             const params = {
                 query: query,
@@ -201,7 +181,6 @@
             executeButton.href = queryUrl;
             executeButton.style.display = 'inline-flex';
 
-            // Update process header to step 3 when query is generated
             updateProcessHeader(3);
 
             window.scrollTo({
