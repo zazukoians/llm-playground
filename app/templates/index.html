@@ -10,19 +10,27 @@
 <body>
     <h1>Write SPARQL queries with AI</h1>
 
-    <!-- Steps Indicator -->
-    <div class="steps-indicator">
-        <div class="step active">
-            <i class="fas fa-question-circle"></i>
-            <span>Ask Question</span>
-        </div>
-        <div class="step">
-            <i class="fas fa-code"></i>
-            <span>Generate Query</span>
-        </div>
-        <div class="step">
-            <i class="fas fa-chart-bar"></i>
-            <span>View Data</span>
+    <!-- Steps Indicator with data-step attributes -->
+    <div class="steps-container">
+        <div class="steps">
+            <div class="step active" data-step="1">
+                <div class="step-icon">
+                    <i class="fas fa-question"></i>
+                </div>
+                <span class="step-text">Ask Question</span>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <span class="step-text">Generate Query</span>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <span class="step-text">View Data</span>
+            </div>
         </div>
     </div>
 
@@ -39,27 +47,31 @@
     </div>
 
     <div class="query-section">
-        <div class="question-container">
-            <form id="queryForm" action="/ui" method="post">
-                <textarea
-                    required
-                    id="question"
-                    name="question"
-                    placeholder="Example: What was the air quality in Zurich last year?">{{ question }}</textarea>
-                <button id="submitButton" type="submit">Generate Query</button>
-            </form>
-        </div>
+        <div class="main-content">
+            <div class="question-container">
+                <form id="queryForm" action="/ui" method="post">
+                    <textarea
+                        required
+                        id="question"
+                        name="question"
+                        placeholder="Example: What was the air quality in Zurich last year?">{{ question }}</textarea>
+                    <button id="submitButton" type="submit">Generate Query</button>
+                </form>
+            </div>
 
-        <div class="examples-section">
-            <div class="examples-label">Suggested Questions</div>
-            <select id="examples">
-                <option value="">Select an example</option>
-                <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
-                <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
-                <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
-                <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
-                <option value="what bathing stations are there?">What bathing stations are there?</option>
-            </select>
+            <div class="connector"></div>
+
+            <div class="examples-section">
+                <div class="examples-label">Suggested Questions</div>
+                <select id="examples">
+                    <option value="">Select an example</option>
+                    <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
+                    <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
+                    <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
+                    <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
+                    <option value="what bathing stations are there?">What bathing stations are there?</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -89,6 +101,25 @@
     </div>
 
     <script>
+        // Process Header State Management
+        function updateProcessHeader(currentStep) {
+            const steps = document.querySelectorAll('.step');
+
+            steps.forEach(step => {
+                const stepNumber = parseInt(step.getAttribute('data-step'));
+
+                // Remove all states first
+                step.classList.remove('active', 'completed');
+
+                // Add appropriate state
+                if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
         // Rotating placeholders
         const placeholders = [
             "Example: What was the air quality in Zurich last year?",
@@ -115,6 +146,9 @@
             document.getElementById('spinner').style.display = 'block';
             document.getElementById('submitButton').disabled = true;
             document.getElementById('responseContainer').style.display = 'none';
+
+            // Update process header to step 2
+            updateProcessHeader(2);
         });
 
         // Handle query URL generation
@@ -142,6 +176,9 @@
             const queryUrl = `https://lindas.admin.ch/sparql/#${encodedParams}`;
             executeButton.href = queryUrl;
             executeButton.style.display = 'inline-flex';
+
+            // Update process header to step 3 when query is generated
+            updateProcessHeader(3);
 
             window.scrollTo({
                 top: document.documentElement.scrollHeight,
