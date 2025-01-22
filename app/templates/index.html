@@ -1,31 +1,87 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPARQL AI API</title>
+    <title>Write SPARQL with AI</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <h1>SPARQL AI API</h1>
-    <select id="examples">
-        <option value="">Select an example</option>
-        <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
-        <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
-        <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
-        <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
-        <option value="what bathing stations are there?">What bathing stations are there?</option>
-    </select>
-    <form id="queryForm" action="/ui" method="post">
-        <label for="question">Question:</label>
-        <textarea required id="question" name="question">{{ question }}</textarea>
-        <button id="submitButton" type="submit">Generate Query</button>
-    </form>
+    <h1>Write SPARQL queries with AI</h1>
+
+    <!-- Steps Indicator with data-step attributes -->
+    <div class="steps-container">
+        <div class="steps-inner">
+            <div class="steps">
+                <div class="step active" data-step="1">
+                    <div class="step-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <span class="step-text">Ask Question</span>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="step-text">Generate Query</span>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <span class="step-text">View Data</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro-section">
+        <h2>Would you talk to your database?</h2>
+        <p>Here you can access Swiss environmental data using plain English. No coding required.</p>
+
+        <div class="workflow-steps">
+            ask a question → get a query → view your data
+        </div>
+
+        <p>The datasets cover Swiss environmental data across various domains:
+            from air quality and noise pollution, to forest health indicators, greenhouse gas emissions, environmental risks, and water quality.</p>
+    </div>
+
+    <div class="query-section">
+        <div class="main-content">
+            <div class="question-container">
+                <form id="queryForm" action="/ui" method="post">
+                    <textarea
+                        required
+                        id="question"
+                        name="question"
+                        placeholder="Example: What bathing stations are there?">{{ question }}</textarea>
+                    <button id="submitButton" type="submit">Generate Query</button>
+                </form>
+            </div>
+
+            <div class="connector"></div>
+
+            <div class="examples-section">
+                <div class="examples-label">Suggested Questions</div>
+                <select id="examples">
+                    <option value="">Select an example</option>
+                    <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
+                    <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
+                    <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
+                    <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
+                    <option value="what bathing stations are there?">What bathing stations are there?</option>
+                    <option value="Compare water quality across locations">Compare water quality across locations</option>
+                    <option value="Show me trends in emissions of greenhouse gases">Show me trends in emissions of greenhouse gases</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="spinner" id="spinner"></div>
 
     <div id="responseContainer">
-
         {% if error %}
             <h2>This data is unavailable</h2>
             {% if error is mapping %}
@@ -34,23 +90,104 @@
                 <pre>{{ error }}</pre>
             {% endif %}
         {% else %}
-            <h2>Generated Query:</h2>
-            {% if query %}
-            Cube: <a href="{{ cube }}">{{ cube }}</a>
-            <pre>{{ query }}</pre>
-            {% endif %}
+            <div id="queryResultSection">
+                <h2>Generated Query:</h2>
+                {% if query %}
+                Cube: <a href="{{ cube }}">{{ cube }}</a>
+                <pre id="generatedQuery">{{ query }}</pre>
+                <div class="execute-button-container">
+                    <a id="executeButton" href="" target="_blank" style="display: none;" class="execute-button">
+                        <i class="fas fa-play"></i>
+                        Execute Query
+                    </a>
+                </div>
+                {% endif %}
+            </div>
         {% endif %}
     </div>
 
     <script>
+        window.addEventListener('scroll', function() {
+            const container = document.querySelector('.steps-container');
+            if (window.scrollY > 0) {
+                container.classList.add('sticky');
+            } else {
+                container.classList.remove('sticky');
+            }
+        });
+
+        function updateProcessHeader(currentStep) {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => {
+                const stepNumber = parseInt(step.getAttribute('data-step'));
+                step.classList.remove('active', 'completed');
+                if (stepNumber < currentStep) {
+                    step.classList.add('completed');
+                } else if (stepNumber === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        const placeholders = [
+            "Example: What swiss bathing stations had poor water quality in 2020?",
+            "Example: Show me trends in emissions of greenhouse gases",
+            "Example: Compare water quality across locations"
+        ];
+        let currentPlaceholder = 0;
+        const questionInput = document.getElementById('question');
+
+        function rotatePlaceholder() {
+            currentPlaceholder = (currentPlaceholder + 1) % placeholders.length;
+            questionInput.placeholder = placeholders[currentPlaceholder];
+        }
+
+        setInterval(rotatePlaceholder, 5000);
+
         document.getElementById('examples').addEventListener('change', function() {
             document.getElementById('question').value = this.value;
         });
+
         document.getElementById('queryForm').addEventListener('submit', function() {
             document.getElementById('spinner').style.display = 'block';
             document.getElementById('submitButton').disabled = true;
             document.getElementById('responseContainer').style.display = 'none';
+            updateProcessHeader(2);
         });
+
+        const queryElement = document.getElementById('generatedQuery');
+        const executeButton = document.getElementById('executeButton');
+
+        if (queryElement && executeButton) {
+            const query = queryElement.textContent;
+            document.getElementById('queryResultSection').style.display = 'block';
+
+            const params = {
+                query: query,
+                endpoint: 'https://lindas.admin.ch/query',
+                requestMethod: 'POST',
+                tabTitle: 'Query 1',
+                headers: '{}',
+                contentTypeConstruct: 'application/n-triples,*//*;q=0.9',
+                contentTypeSelect: 'application/sparql-results+json,*//*;q=0.9',
+                outputFormat: 'table'
+            };
+
+            const encodedParams = Object.entries(params)
+                .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                .join('&');
+
+            const queryUrl = `https://lindas.admin.ch/sparql/#${encodedParams}`;
+            executeButton.href = queryUrl;
+            executeButton.style.display = 'inline-flex';
+
+            updateProcessHeader(3);
+
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
     </script>
 </body>
 </html>
