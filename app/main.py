@@ -58,8 +58,8 @@ def get_cache_key(question: str, cube: str = None) -> str:
 
 async def _select_cube(question: str) -> str:
     cube_selection_settings = {
-        "temperature": 0.5,
-        "top_p": 0.5
+        "temperature": 0.2,
+        "top_p": 0.1
     }
     cubes = fetch_cubes_descriptions()
     cube_selection_chain = create_cube_selection_chain(api_key=OPENAI_API_KEY, handler=handler, **cube_selection_settings)

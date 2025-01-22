@@ -121,15 +121,10 @@ def create_cube_selection_chain(api_key: str, handler: BaseCallbackHandler, temp
 
     human_template = """
     For this question: {question}
-    Return the cube ID that best answers this question formatted as an angle-bracketed URL. Justify your answer.
-
-    Example:
-    - Correct format: <https://example.com/cube/1>
-    - Incorrect format: https://example.com/cube/1>
+    Return the cube ID that best answers this question. Justify your answer.
 
     If no cube matches even with these mandatory rules, return 'Unable to select proper cube'.
     List all topics that ARE available in the cubes. Format the available topics as a list ith bullet points.
-
 
     """
 
@@ -162,7 +157,7 @@ def create_query_generation_chain(api_key: str, handler: BaseCallbackHandler, te
     1. Do not add any explanatory text before or after the query
     2. Do not wrap the output in code blocks or sparql tags
     3. The query should start directly with the PREFIX declarations
-    4. Aggregations (COUNT, SUM, AVG, MIN, MAX) can be used ONLY in the same line as SELECT.
+    4. COUNT, SUM, AVG, MIN, MAX functions can only be used in the same line as SELECT. Do not use them anywhere else.
     5. For aggregations (COUNT, SUM, AVG, MIN, MAX), rename variable using this exact pattern:
     (SUM(?a) AS ?sum_a)
     (COUNT(?a) AS ?count_a)
@@ -183,6 +178,9 @@ def create_query_generation_chain(api_key: str, handler: BaseCallbackHandler, te
 
     For a specific year:
     FILTER(?year = "2004"^^xsd:gYear)
+
+    7. If you extract year from date, follow this exact pattern:
+    BIND(STRDT(STR(YEAR(?date)), xsd:gYear) AS ?year)
     """
 
     query_template = """
@@ -222,10 +220,10 @@ def create_query_generation_chain(api_key: str, handler: BaseCallbackHandler, te
 
 def parse_all_cubes(ai_response: str) -> list[str]:
     words = ai_response.split()
-    cube_pattern = r'<.+>'
+    cube_pattern = r'(?:\[|\(|<)(https?://[^\]>\)]+)(?:\]|\)|>)'
     groups_of_cubes = map(lambda s: re.findall(cube_pattern, s), words)
 
-    return [cube for group in groups_of_cubes for cube in group]
+    return [f'<{cube}>' for group in groups_of_cubes for cube in group]
 
 
 def fetch_cube_sample(cube: str) -> str:
