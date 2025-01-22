@@ -17,109 +17,7 @@
             color: #333;
         }
 
-        .intro-section {
-            max-width: 800px;
-            margin: 2rem auto 3rem auto;
-            padding: 2rem;
-        }
 
-        .intro-section h2 {
-            color: #2C3E50;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .intro-section p {
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
-            color: #424242;
-            line-height: 1.6;
-        }
-
-        .workflow-steps {
-            color: #666;
-            font-size: 1.1rem;
-            font-style: italic;
-            padding: 0.8rem 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-
-        .final-note {
-            font-size: 1.05rem;
-            color: #666;
-        }
-
-        .query-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .query-container {
-            display: flex;
-            gap: 1rem;
-            align-items: stretch;  /* Changed from flex-start */
-            width: 100%;
-        }
-
-        .question-container {
-            flex: 1;
-            display: flex;           /* Added */
-            flex-direction: column;  /* Added */
-        }
-
-        #queryForm {
-            display: flex;           /* Added */
-            flex-direction: column;  /* Added */
-            height: 100%;           /* Added */
-        }
-
-        #question {
-            width: 100%;
-            min-height: 100px;
-            margin-top: 0.5rem;
-        }
-
-        #examples {
-            width: 250px;
-            flex-shrink: 0;         /* Added */
-        }
-
-        .execute-button-container {
-            display: flex;
-            justify-content: flex-start;
-            margin: 2rem 0;
-            padding-left: 80%;
-        }
-
-        .execute-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .execute-button:hover {
-            background-color: #45a049;
-        }
-
-        .execute-button i {
-            font-size: 1rem;
-        }
     </style>
 </head>
 <body>
@@ -140,6 +38,19 @@
 
     <div class="query-section">
         <div class="query-container">
+            <!-- Examples dropdown moved above and wrapped -->
+            <div class="examples-wrapper">
+                <select id="examples">
+                    <option value="">Select an example</option>
+                    <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
+                    <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
+                    <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
+                    <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
+                    <option value="what bathing stations are there?">What bathing stations are there?</option>
+                </select>
+            </div>
+
+            <!-- Question container below -->
             <div class="question-container">
                 <form id="queryForm" action="/ui" method="post">
                     <label for="question">Question:</label>
@@ -147,14 +58,6 @@
                     <button id="submitButton" type="submit">Generate Query</button>
                 </form>
             </div>
-            <select id="examples">
-                <option value="">Select an example</option>
-                <option value="What is sum of emission of CO2 for industry between year 2009 and 2011">What is sum of emission of CO2 for industry between year 2009 and 2011</option>
-                <option value="What was average contamination in lead in soil in 2022?">What was average contamination in lead in soil in 2022?</option>
-                <option value="What percentage of emission was from N2O and CH4 compared to total emission?">What percentage of emission was from N2O and CH4 compared to total emission?</option>
-                <option value="what swiss bathing stations had poor water quality in 2020?">What swiss bathing stations had poor water quality in 2020?</option>
-                <option value="what bathing stations are there?">What bathing stations are there?</option>
-            </select>
         </div>
     </div>
 
